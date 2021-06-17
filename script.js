@@ -7,30 +7,39 @@ var allSpec = ["!","#","$","%","&","(",")","*","+","-",".","/",":",";","<","=","
 
 function generatePassword() {
   var passPool = [];
+  var passMade = "";
   var passLength = window.prompt("Please Type length of your wanted password (8 ~ 128)");
   if (passLength < 8 || passLength > 128) {
     window.alert("!Password Length must be between 8 and 128!")
     return;}
   var useUpper = window.confirm("Do you want Uppercase on your password?");
-  if (useUpper) {var passPool = passPool.concat(allUpper);}
+  if (useUpper) {
+    passPool = passPool.concat(allUpper);
+    passMade += allUpper[Math.floor(Math.random() * allUpper.length)];
+  }
   var useLower = window.confirm("Do you want Lowercase on your password?");
-  if (useLower) {var passPool = passPool.concat(allLower);}
-  var useNum = window.confirm("Do you want numbers on your password?");
-  if (useNum) {var passPool = passPool.concat(allNums);}
+  if (useLower) {
+    passPool = passPool.concat(allLower);
+    passMade += allLower[Math.floor(Math.random() * allLower.length)];
+  }
+  var useNum = window.confirm("Do you want Numbers on your password?");
+  if (useNum) {
+    passPool = passPool.concat(allNums);
+    passMade += allNums[Math.floor(Math.random() * allNums.length)];
+  }
   var useSpec = window.confirm("Do you want Special letters on your password?");
-  if (useSpec) {var passPool = passPool.concat(allSpec);}
+  if (useSpec) {
+    passPool = passPool.concat(allSpec);
+    passMade += allSpec[Math.floor(Math.random() * allSpec.length)];
+  }
   if (!useUpper && !useLower && !useNum && !useSpec) {
     window.alert("At least one of letters must be included!")
     return;} else {
-  var passMade = [];
-  for (var i = 0, n = passPool.length; i < passLength; ++i) { 
-    passMade += passPool[Math.floor(Math.random() * n)];
+  
+  while (passMade.length < passLength) { 
+    passMade += passPool[Math.floor(Math.random() * passPool.length)];
   }
-  return passMade
-  // var passMade = Math.floor(Math.random() * passLength.length);
-    // choose "passlength" letters from the pool one by one.
-    console.log("This is your new password " + passMade)
-    console.log(passPool);
+  return passMade;
   
   } }
 
